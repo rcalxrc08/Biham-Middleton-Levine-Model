@@ -11,7 +11,7 @@ addons:
       - g++
       - cmake
 before_install:
-- sudo apt-get install libopenmpi
+- sudo apt-get install libopenmpi-dev
 install:
 - sudo apt-get install g++
 - export CXX="g++"
