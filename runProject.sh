@@ -2,7 +2,7 @@
 rm -f *.o
 rm -f *.csv
 rm -f *.txt
-g++ creator.cpp -o problem.o
+g++-6 creator.cpp -o problem.o
 arr=( $(awk 'BEGIN{srand(); r=rand(); print r, 1-r}') )
 touch file.txt
 echo $RANDOM >> file.txt

@@ -8,12 +8,12 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++
+      - g++-6
       - cmake
 before_install:
 - sudo apt-get install libopenmpi-dev
+- sudo apt-get install g++-6
 install:
-- sudo apt-get install g++
-- export CXX="g++"
+- export CXX="g++-6"
 - chmod +x runProject.sh
 script: "bash -c ./runProject.sh"
