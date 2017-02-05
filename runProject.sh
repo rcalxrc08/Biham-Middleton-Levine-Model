@@ -10,8 +10,9 @@ echo $RANDOM >> file.txt
 echo "${arr[0]}" >> file.txt
 ./problem.o<file.txt
 echo "$RANDOM" | cat - problem.csv> temp && mv temp problem.csv
-# sed -i '/./!d' problem.csv
-# sed -i '/./!d' problem.csv
+echo >> problem.csv
+ sed -i '/./!d' problem.csv
+ sed -i '/./!d' problem.csv
 rm -f ConsegnaMPI/problem.csv
 rm -f ConsegnaParallelo/problem.csv
 rm -f ConsegnaSeriale/problem.csv
