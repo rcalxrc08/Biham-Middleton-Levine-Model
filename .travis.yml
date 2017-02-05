@@ -1,0 +1,19 @@
+language: cpp
+compiler: g++
+notifications:
+  email: false
+sudo: required
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++
+      - cmake
+before_install:
+- sudo apt-get install libopenmpi
+install:
+- sudo apt-get install g++
+- export CXX="g++"
+- chmod +x runProject.sh
+script: "bash -c ./runProject.sh"
