@@ -3,7 +3,7 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
-
+#include <cstdlib>
 using namespace std;
 
 void creation(int m,int n,float density);

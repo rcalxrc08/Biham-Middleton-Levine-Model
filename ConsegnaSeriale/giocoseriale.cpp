@@ -289,9 +289,11 @@ inline unsigned int dimension:: righe(){
 
 
 int main(){
+	std::cout<<"Starting BML"<<std::endl;
    dimension b("problem.csv");
    traffico a(b.righe(),b.colonne(),"problem.csv");
    a.fai();
+   std::cout<<"Ending BML"<<std::endl;
    //a.stampa();
    return 0;
 }
