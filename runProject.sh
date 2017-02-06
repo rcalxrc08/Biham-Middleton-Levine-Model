@@ -6,7 +6,7 @@ g++-6 creator.cpp -o problem.o
 arr=( $(awk 'BEGIN{srand(); r=rand(); print r, 1-r}') )
 touch file.txt
 echo $RANDOM >> file.txt
-echo $RANDOM >> file.txt
+echo 100 >> file.txt
 echo "${arr[0]}" >> file.txt
 ./problem.o<file.txt
 echo "$RANDOM" | cat - problem.csv> temp && mv temp problem.csv
