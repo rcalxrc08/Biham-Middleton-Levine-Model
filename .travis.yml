@@ -16,5 +16,5 @@ before_install:
 - sudo apt-get install libmpich1.0-dev
 install:
 - export CXX="g++-6"
-- chmod +x runProject.sh
+- chmod +x runProject.sh 
 script: "bash -c ./runProject.sh"
