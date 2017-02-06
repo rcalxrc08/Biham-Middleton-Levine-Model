@@ -12,6 +12,8 @@ addons:
       - cmake
 before_install:
 - sudo apt-get install libopenmpi-dev
+- sudo apt-get install openmpi-common
+- sudo apt-get install openmpi-bin
 - sudo apt-get install g++-6
 - sudo apt-get install libmpich1.0-dev
 install:
