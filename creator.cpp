@@ -51,11 +51,11 @@ int main() {
     int m,n;
     float density;
     cout<<"N of row: ";
-    cin>>m;cout<<endl;
+    cin>>m;cout<<m<<endl;
     cout<<"N of column: ";
-    cin>>n;cout<<endl;
+    cin>>n;cout<<n<<endl;
     cout<<"Density: ";
-    cin>>density;cout<<endl;
+    cin>>density;cout<<density<<endl;
     creation(m,n,density);
     return 0;
 }

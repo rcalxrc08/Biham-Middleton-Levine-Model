@@ -215,7 +215,7 @@ void traffico::scambi(unsigned int o,unsigned int n){
          B=blu();
          ++cont;
          if(B==false && R==false){
-            cout<<"la matrice si e bloccata allo scambio "<<cont<<endl;
+            cout<<"Matrix stopped at step "<<cont<<endl;
             break;
             }
          }

@@ -226,7 +226,7 @@ bool B=false;bool R=false;bool B1=false;bool R1=false;unsigned int cont=0;
 			MPI_Allreduce(&B1, &B, 1, MPI::BOOL,MPI_LOR,MPI_COMM_WORLD);
 		   
                       if(B==false && R==false){
-                         cout<<"la matrice si e bloccata allo scambio "<<cont<<endl;
+                         cout<<"Matrix stopped at step "<<cont<<endl;
                          break;
                                               }
 
@@ -244,7 +244,7 @@ bool B=false;bool R=false;bool B1=false;bool R1=false;unsigned int cont=0;
 			MPI_Allreduce(&B1, &B, 1, MPI::BOOL,MPI_LOR,MPI_COMM_WORLD);
 
                          if(B==false && R==false){
-                         cout<<"la matrice si e bloccata allo scambio "<<cont<<endl;
+                         cout<<"Matrix stopped at step "<<cont<<endl;
                          break;
                          }
 

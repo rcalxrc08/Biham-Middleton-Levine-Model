@@ -203,7 +203,7 @@ if(o==0||vec[o-1]%2==0){
       R=red();
       ++cont;
       if(B==false && R==false){
-         cout<<"la matrice si e bloccata allo scambio "<<cont<<endl;
+         cout<<"Matrix stopped at step "<<cont<<endl;
          break;
          }
       }
@@ -217,7 +217,7 @@ else{
       B=blu();
       ++cont;
       if(B==false && R==false){
-         cout<<"la matrice si e bloccata allo scambio "<<cont<<endl;
+         cout<<"Matrix stopped at step "<<cont<<endl;
          break;
          }
       }
