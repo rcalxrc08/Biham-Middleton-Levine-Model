@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
-#include "class2.h"
+#include "Utils.h"
 #include <omp.h>
 
 using namespace std;
