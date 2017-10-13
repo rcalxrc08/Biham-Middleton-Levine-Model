@@ -13,23 +13,23 @@ echo "$RANDOM" | cat - problem.csv> temp && mv temp problem.csv
 echo >> problem.csv
  sed -i '/./!d' problem.csv
  sed -i '/./!d' problem.csv
-rm -f ConsegnaMPI/problem.csv
-rm -f ConsegnaParallelo/problem.csv
-rm -f ConsegnaSeriale/problem.csv
-cp problem.csv ConsegnaMPI/
-cp problem.csv ConsegnaSeriale/
-cp problem.csv ConsegnaParallelo/
-cd ConsegnaSeriale/
+rm -f MPI/problem.csv
+rm -f OpenMP/problem.csv
+rm -f Serial/problem.csv
+cp problem.csv MPI/
+cp problem.csv Serial/
+cp problem.csv OpenMP/
+cd Serial/
 chmod +x build.sh run.sh
 ./build.sh
 ./run.sh
 cd ../
-cd ConsegnaParallelo/
+cd OpenMP/
 chmod +x build.sh run.sh
 ./build.sh
 ./run.sh
 cd ../
-cd ConsegnaMPI/
+cd MPI/
 chmod +x build.sh run.sh
 ./build.sh
 ./run.sh
