@@ -28,10 +28,25 @@ gioco::gioco(unsigned int r,unsigned int c,const char *filename_X,int rank, int 
 	unsigned int kk=r+1;
 	unsigned int tre=floor(kk/size);
 	cols=c;
-	for(unsigned KK=0;KK<100;KK++){vec[KK]=-1;}
-	if(size==1){rig=r+2;}
-	else{if(rank==size-1){rig=tre+1+kk%size;}
-	else{rig=tre+1;}}
+	for(unsigned KK=0;KK<100;KK++)
+	{
+		vec[KK]=-1;
+	}
+	if(size==1)
+	{
+		rig=r+2;
+	}
+	else
+	{
+		if(rank==size-1)
+		{
+			rig=tre+1+kk%size;
+		}
+		else
+		{
+			rig=tre+1;
+		}
+	}
 	v=new char[rig*cols];
 	unsigned int contatore=0;
 	unsigned int pp1=0;
@@ -95,7 +110,8 @@ gioco::gioco(unsigned int r,unsigned int c,const char *filename_X,int rank, int 
 		{
 			UB=(rank+1)*tre;
 		}
-		else{
+		else
+		{
 			if(rank<size-1)
 			{
 				UB=(rank+1)*tre;
@@ -125,7 +141,6 @@ gioco::gioco(unsigned int r,unsigned int c,const char *filename_X,int rank, int 
 	file_X.close();
 	//cout<<"ho finito la costruzione per "<<rank<<endl;
 }
-
 
 gioco::~gioco()
 {
@@ -175,7 +190,6 @@ bool gioco::red()
 			v[(j+1)*cols-1]=cv;
 		}       
 	}
-
 	return F;
 }
 
@@ -199,7 +213,10 @@ bool gioco::blu(int rank,int size)
 		{
 			if(v[k*cols+j]==bc && v[(k+1)*cols+j]==cv)
 			{
-				if(!T){T=true;}
+				if(!T)
+				{
+					T=true;
+				}
 
 				v[k*cols+j]=cv;
 				v[(k+1)*cols+j]=bc;
@@ -266,7 +283,8 @@ bool gioco::blu(int rank,int size)
 			v[aa]='1';
 		}
 	}
-	else{
+	else
+	{
 		unsigned int a1=0;
 		unsigned int a2=0;
 		while(buf1[a1]>=0)
@@ -293,7 +311,8 @@ bool gioco::blu(int rank,int size)
 
 
 //in ingresso differenza tra il numero di iterazioni prec e quelle successive e l'indice del vettore iterazione corrente.
-void gioco::scambi(unsigned int o,unsigned int n,int rank,int size){
+void gioco::scambi(unsigned int o,unsigned int n,int rank,int size)
+{
 	bool B=false;bool R=false;bool B1=false;bool R1=false;unsigned int cont=0;
 	if(o==1||vec[o]%2==0)
 	{
@@ -344,13 +363,17 @@ void gioco::scambi(unsigned int o,unsigned int n,int rank,int size){
 //stampa su file
 
 
-void gioco::stampafile(unsigned int n,int rank,int size){
+void gioco::stampafile(unsigned int n,int rank,int size)
+{
 	stringstream c;
 	int Buff1=0;
 	MPI_Status stats1;
 	//cout<<"sono "<<rank<<" e ho "<<rig<<" righe"<<endl;
 	string s;
-	if(rank>0){MPI_Recv(&Buff1,1, MPI_INT,rank-1,MPI_ANY_TAG,MPI_COMM_WORLD,&stats1);}
+	if(rank>0)
+	{
+		MPI_Recv(&Buff1,1, MPI_INT,rank-1,MPI_ANY_TAG,MPI_COMM_WORLD,&stats1);
+	}
 	c<<vec[n];
 	c<<".csv";
 	s=c.str();
@@ -358,27 +381,43 @@ void gioco::stampafile(unsigned int n,int rank,int size){
 	if (rank==0) {//cout<<c.str()<<endl;
 		outfile.open (s.c_str());
 	}
-	else {
+	else 
+	{
 		outfile.open (s.c_str(),fstream::app);
 		outfile<<endl;
 	}
-	for(unsigned int h=cols;h<(rig)*cols;++h){
+	for(unsigned int h=cols;h<(rig)*cols;++h)
+	{
 		outfile<<v[h];
-		if((h+1)%cols!=0){outfile<<',';}
-		else if (h!=rig*cols-1){outfile<<endl;}
+		if((h+1)%cols!=0)
+		{
+			outfile<<',';
+		}
+		else if (h!=rig*cols-1)
+		{
+			outfile<<endl;
+		}
 	}
 	outfile.close();
-	if(rank<size-1){MPI_Send(&Buff1,1,MPI_INT,rank+1,1,MPI_COMM_WORLD);}
+	if(rank<size-1)
+	{
+		MPI_Send(&Buff1,1,MPI_INT,rank+1,1,MPI_COMM_WORLD);
+	}
 
 }
 
-void gioco::fai(int rank,int size){
+void gioco::fai(int rank,int size)
+{
 	int pre=0;
 	unsigned int aa=0;
-	while(vec[aa]>=0){aa++;}
+	while(vec[aa]>=0)
+	{
+		aa++;
+	}
 
 
-	for(unsigned int c=0;c<aa;++c){
+	for(unsigned int c=0;c<aa;++c)
+	{
 		scambi(c,vec[c]-pre,rank,size);
 
 		MPI_Barrier(MPI_COMM_WORLD);
@@ -398,7 +437,8 @@ density::density(const char *filename_X)
 double numd0=0;
 double numel=0;
 file_X.open(filename_X);
-if (file_X.is_open()){
+if (file_X.is_open())
+{
 	string line;
 	rig=0;
 	cols=0;
@@ -406,30 +446,36 @@ if (file_X.is_open()){
 	unsigned int i=0;
 	getline(file_X,line);
 	getline(file_X, line);
-	while(true){
+	while(true)
+	{
 		lunghezza=line.size();
 
 
-		if(rig!=0&&lunghezza!=line.size()){
+		if(rig!=0&&lunghezza!=line.size())
+		{
 			throw runtime_error("righe di diversa lunghezza o vuote");
 		}
 
 		rig++;
 		i=0;
-		while(i<line.size()){
+		while(i<line.size())
+		{
 			++numel;
-			if(line[i]!='0'){
+			if(line[i]!='0')
+			{
 				++numd0;
 			}
 
-			if(line[i]!='0'&&line[i]!='1'&&line[i]!='2'){
+			if(line[i]!='0'&&line[i]!='1'&&line[i]!='2')
+			{
 				throw runtime_error("dati non validi");
 			}
 
 
 			i+=2;
 		}
-		if(line.size()%2==0){
+		if(line.size()%2==0)
+		{
 			throw runtime_error("dati non validi");
 		}
 		getline(file_X, line);
@@ -446,23 +492,29 @@ file_X.close();
 
 //metodi che mi ritornano il numero di righe,colonne e stampa densità della matrice
 
-unsigned int density:: colonne(){
+unsigned int density:: colonne()
+{
 	return cols;
 }
 
-unsigned int density:: righe(){
+unsigned int density:: righe()
+{
 	return rig;
 }
 
-void density::stampa(){
+void density::stampa()
+{
 	cout<<densit;
 }
-double density::densty(){
-	return densit;}
+double density::densty()
+{
+	return densit;
+}
 
 
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[])
+{
 	density b("problem.csv");
 	MPI::Init(argc, argv);// MPI_FORK
 	int rank = MPI::COMM_WORLD.Get_rank();
