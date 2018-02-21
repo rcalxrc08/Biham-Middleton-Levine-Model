@@ -1,3 +1,5 @@
+#ifndef BHL_MPI_UTILS_H
+#define BHL_MPI_UTILS_H
 
 using namespace std;
 class gioco
@@ -39,11 +41,11 @@ public:
 class sparse
 {
 private:
-	vector<unsigned int>blucar;
-	vector<unsigned int>redcar;
-	vector<unsigned int>vec;
-	vector<unsigned int>numcol;
-	vector<unsigned int>numsurig;
+	std::vector<unsigned int>blucar;
+	std::vector<unsigned int>redcar;
+	std::vector<unsigned int>vec;
+	std::vector<unsigned int>numcol;
+	std::vector<unsigned int>numsurig;
 	unsigned int rig;
 	unsigned int cols;
 	unsigned int bsize;
@@ -61,3 +63,5 @@ public:
 	void stampafile(unsigned int n);
 	void fai();
 };
+
+#endif //BHL_MPI_UTILS_H

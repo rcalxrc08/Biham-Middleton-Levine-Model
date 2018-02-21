@@ -1,5 +1,5 @@
 #include <cmath>
-#include<algorithm>
+#include <algorithm>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -7,11 +7,13 @@
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
-#include "class1.h"
 #include <stdexcept>
 #include <omp.h>
 #include <sys/time.h>
 #include <mpi.h>
+
+#include "Utils.h"
+
 using namespace std;
 
 const char rc='2';
@@ -22,9 +24,9 @@ const char cv='0';
 //costruttore da file;
 gioco::gioco(unsigned int r,unsigned int c,const char *filename_X,int rank, int size)
 {
-	//cout<<"inizio costruzione per "<<rank<<endl;
+	//std::cout<<"inizio costruzione per "<<rank<<endl;
 	ifstream file_X;
-	string line;
+	std::string line;
 	unsigned int kk=r+1;
 	unsigned int tre=floor(kk/size);
 	cols=c;
@@ -56,7 +58,7 @@ gioco::gioco(unsigned int r,unsigned int c,const char *filename_X,int rank, int 
 		unsigned int i=0;
 		unsigned int length=0;
 		unsigned int n=0;
-		string line1;
+		std::string line1;
 		getline(file_X, line1);
 		length=line1.length();
 
@@ -68,7 +70,7 @@ gioco::gioco(unsigned int r,unsigned int c,const char *filename_X,int rank, int 
 			line1=line1.substr(line1.find(',')+1);
 		}
 		sort(vec,vec+pp1-1);
-		string line2;
+		std::string line2;
 		unsigned int cc=0;
 		while(cc<r+3)
 		{
@@ -139,7 +141,7 @@ gioco::gioco(unsigned int r,unsigned int c,const char *filename_X,int rank, int 
 	}
 
 	file_X.close();
-	//cout<<"ho finito la costruzione per "<<rank<<endl;
+	//std::cout<<"ho finito la costruzione per "<<rank<<endl;
 }
 
 gioco::~gioco()
@@ -154,9 +156,9 @@ void gioco::stampa()
 	{
 		for(unsigned int j=0;j<cols;j++)
 		{
-			cout<<v[j+i*cols];cout<<' ';
+			std::cout<<v[j+i*cols];std::cout<<' ';
 		}
-		cout<<endl;   
+		std::cout<<endl;   
 	}
 }
 
@@ -328,7 +330,7 @@ void gioco::scambi(unsigned int o,unsigned int n,int rank,int size)
 
 			if(B==false && R==false)
 			{
-				cout<<"Matrix stopped at step "<<cont<<endl;
+				std::cout<<"Matrix stopped at step "<<cont<<endl;
 				break;
 			}
 		}
@@ -349,7 +351,7 @@ void gioco::scambi(unsigned int o,unsigned int n,int rank,int size)
 
 			if(B==false && R==false)
 			{
-				cout<<"Matrix stopped at step "<<cont<<endl;
+				std::cout<<"Matrix stopped at step "<<cont<<endl;
 				break;
 			}
 
@@ -368,8 +370,8 @@ void gioco::stampafile(unsigned int n,int rank,int size)
 	stringstream c;
 	int Buff1=0;
 	MPI_Status stats1;
-	//cout<<"sono "<<rank<<" e ho "<<rig<<" righe"<<endl;
-	string s;
+	//std::cout<<"sono "<<rank<<" e ho "<<rig<<" righe"<<endl;
+	std::string s;
 	if(rank>0)
 	{
 		MPI_Recv(&Buff1,1, MPI_INT,rank-1,MPI_ANY_TAG,MPI_COMM_WORLD,&stats1);
@@ -378,7 +380,7 @@ void gioco::stampafile(unsigned int n,int rank,int size)
 	c<<".csv";
 	s=c.str();
 	ofstream outfile;
-	if (rank==0) {//cout<<c.str()<<endl;
+	if (rank==0) {//std::cout<<c.str()<<endl;
 		outfile.open (s.c_str());
 	}
 	else 
@@ -422,7 +424,7 @@ void gioco::fai(int rank,int size)
 
 		MPI_Barrier(MPI_COMM_WORLD);
 		stampafile(c,rank,size);
-		//cout<<"sono "<<rank<<"e ho "<<vec[c]<<" iterazioni"<<endl;
+		//std::cout<<"sono "<<rank<<"e ho "<<vec[c]<<" iterazioni"<<endl;
 		MPI_Barrier(MPI_COMM_WORLD);
 		pre=vec[c];
 
@@ -439,7 +441,7 @@ double numel=0;
 file_X.open(filename_X);
 if (file_X.is_open())
 {
-	string line;
+	std::string line;
 	rig=0;
 	cols=0;
 	unsigned int lunghezza=0;
@@ -449,8 +451,6 @@ if (file_X.is_open())
 	while(true)
 	{
 		lunghezza=line.size();
-
-
 		if(rig!=0&&lunghezza!=line.size())
 		{
 			throw runtime_error("righe di diversa lunghezza o vuote");
@@ -504,7 +504,7 @@ unsigned int density:: righe()
 
 void density::stampa()
 {
-	cout<<densit;
+	std::cout<<densit;
 }
 double density::densty()
 {

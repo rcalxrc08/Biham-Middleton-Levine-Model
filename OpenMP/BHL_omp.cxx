@@ -1,11 +1,14 @@
 #include<algorithm>
 #include <fstream>
 #include <string>
-#include <vector>
+
 #include <iostream>
 #include <sstream>
 #include "Utils.h"
+
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 
 using namespace std;
 
