@@ -15,7 +15,7 @@ before_install:
 - sudo apt-get install openmpi-common
 - sudo apt-get install openmpi-bin
 - sudo apt-get install g++-6
-- sudo apt-get install libmpich1.0-dev
+- sudo apt-get install libmpich-dev
 install:
 - export CXX="g++-6"
 - chmod +x runProject.sh 
