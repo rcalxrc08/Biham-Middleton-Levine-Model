@@ -1,14 +1,17 @@
+#ifndef BHL_SERIAL_UTILS_H
+#define BHL_SERIAL_UTILS_H
 
-using namespace std;
+#include <vector>
+
 class traffico
 {
 private:
 	char *v;
-	vector<unsigned int>vec;
-	vector<unsigned int>blucar;
-	vector<unsigned int>redcar;
-	vector<unsigned int>numcol;
-	vector<unsigned int>numsurig;
+	std::vector<unsigned int>vec;
+	std::vector<unsigned int>blucar;
+	std::vector<unsigned int>redcar;
+	std::vector<unsigned int>numcol;
+	std::vector<unsigned int>numsurig;
 	unsigned int rig;
 	unsigned int cols;
 	bool blu();
@@ -36,3 +39,5 @@ public:
 	unsigned int colonne();
 	unsigned int righe();
 };
+
+#endif //BHL_SERIAL_UTILS_H

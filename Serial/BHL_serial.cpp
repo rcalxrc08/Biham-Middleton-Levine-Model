@@ -1,7 +1,6 @@
-#include<algorithm>
+#include <algorithm>
 #include <fstream>
 #include <string>
-#include <vector>
 #include <iostream>
 #include <sstream>
 #include "Utils.h"
@@ -14,7 +13,7 @@ const char cv='0';
 
 
 //costruttore:abbiamo optato per una versione ibrida che include sia una struttura densa(il classico vettore matrice)
-//sia una struttura spars(un vettore per le blu ordinato per colonne,uno per le rosse ordinato per righe e
+//sia una struttura sparsa (un vettore per le blu ordinato per colonne,uno per le rosse ordinato per righe e
 //altri due vettori su cui viene salvata la distribuzione cumulativa delle macchine blu e rosse)
 
 traffico::traffico(unsigned int r,unsigned int c,const char *filename_X)
@@ -131,9 +130,11 @@ void traffico::stampa()
 	}
 }
 
+//riordina il vettore delle rossi(solo le macchine che giaciono sulla riga su cui giace ri vengono riordinate)
 void traffico::ordinared(unsigned int ri)
-{                           //riordina il vettore delle rossi(solo le macchine che giaciono sulla riga su cui giace ri vengono riordinate)
-	for(unsigned int contpercol=numsurig[ri/cols+1]-1;contpercol>numsurig[ri/cols];--contpercol){
+{
+	for(unsigned int contpercol=numsurig[ri/cols+1]-1;contpercol>numsurig[ri/cols];--contpercol)
+	{
 		swap(redcar[contpercol],redcar[contpercol-1]);
 	}
 }
@@ -142,8 +143,8 @@ void traffico::ordinared(unsigned int ri)
 
 bool traffico::red()
 {            
-	bool Ftot=false;
-	int prig=-1;                                                      //bool che mi indica se è avvenuto o no almeno un movimento
+	bool Ftot=false;//bool che mi indica se è avvenuto o no almeno un movimento
+	int prig=-1; 
 	for(unsigned int j=0;j<rig;++j)
 	{                                    //ciclo sul numero di righe
 		if(numsurig[j]<redcar.size() && redcar[numsurig[j]]%cols==0)
@@ -354,12 +355,12 @@ dimension::dimension(const char *filename_X)
 
 //metodi che mi ritornano il numero di righe e colonne 
 
-inline unsigned int dimension:: colonne()
+inline unsigned int dimension::colonne()
 {
 	return cols;
 }
 
-inline unsigned int dimension:: righe()
+inline unsigned int dimension::righe()
 {
 	return rig;
 }
