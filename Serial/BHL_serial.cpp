@@ -4,8 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include "Utils.h"
-
-using namespace std;
+#include <ctime>
 
 const char rc='2';
 const char bc='1';
@@ -18,8 +17,9 @@ const char cv='0';
 
 traffico::traffico(unsigned int r,unsigned int c,const char *filename_X)
 {
-	ifstream file_X;
-	string line;
+	
+	std::ifstream file_X;
+	std::string line;
 	rig=r;
 	cols=c;
 	v=new char[rig*cols];
@@ -30,12 +30,12 @@ traffico::traffico(unsigned int r,unsigned int c,const char *filename_X)
 		unsigned int i=0;
 		unsigned int length=0;
 		unsigned int n=0;
-		string line1;
+		std::string line1;
 		getline(file_X, line1);
 		length=line1.length();                  //leggo la prima riga spezzo e la metto nel vettore delle iter
 		while(i<length)
 		{
-			n=atoi(line1.substr(0,line1.find(',')).c_str());
+			n=std::atoi(line1.substr(0,line1.find(',')).c_str());
 			vec.push_back(n);
 			i+=line1.substr(0,line1.find(',')).length()+1;
 			line1=line1.substr(line1.find(',')+1);
@@ -64,7 +64,7 @@ traffico::traffico(unsigned int r,unsigned int c,const char *filename_X)
 						break;
 					}
 				default:
-					cout<<"dati non validi";
+					std::cout<<"dati non validi";
 					exit(1);
 				}
 				i+=2;
@@ -124,9 +124,9 @@ void traffico::stampa()
 	{
 		for(unsigned int j=0;j<cols;++j)
 		{
-			cout<<v[j+i*cols];cout<<' ';
+			std::cout<<v[j+i*cols];std::cout<<' ';
 		}
-		cout<<endl;
+		std::cout<<std::endl;
 	}
 }
 
@@ -135,7 +135,7 @@ void traffico::ordinared(unsigned int ri)
 {
 	for(unsigned int contpercol=numsurig[ri/cols+1]-1;contpercol>numsurig[ri/cols];--contpercol)
 	{
-		swap(redcar[contpercol],redcar[contpercol-1]);
+		std::swap(redcar[contpercol],redcar[contpercol-1]);
 	}
 }
 
@@ -191,7 +191,7 @@ void traffico::ordinablu(unsigned int bi)
 {                            //riordina il vettore delle blu(solo le macchine che giacciono sulla colonna su cui giace bi)
 	for(unsigned int contperrig=numcol[bi/rig+1]-1;contperrig>numcol[bi/rig];--contperrig)
 	{
-		swap(blucar[contperrig],blucar[contperrig-1]);
+		std::swap(blucar[contperrig],blucar[contperrig-1]);
 	}
 }
 
@@ -260,9 +260,9 @@ void traffico::scambi(unsigned int o,unsigned int n)
 				break;                           
 			R=red();
 			++cont;
-			if(B==false && R==false)
+			if(!B && !R)
 			{
-				cout<<"la matrice si e bloccata allo scambio "<<cont<<endl;
+				std::cout<<"la matrice si e bloccata allo scambio "<<cont<<std::endl;
 				break;
 			}
 		}
@@ -276,9 +276,9 @@ void traffico::scambi(unsigned int o,unsigned int n)
 			if(cont==n)break;
 			B=blu();
 			++cont;
-			if(B==false && R==false)
+			if(!B && !R)
 			{
-				cout<<"Matrix stopped at step "<<cont<<endl;
+				std::cout<<"Matrix stopped at step "<<cont<<std::endl;
 				break;
 			}
 		}
@@ -290,13 +290,13 @@ void traffico::scambi(unsigned int o,unsigned int n)
 
 void traffico::stampafile(unsigned int n)
 {
-	stringstream c;
-	string s;
+	std::stringstream c;
+	std::string s;
 	c<<vec[n];
 	c<<".csv";
 	s=c.str();
-	cout<<c.str();
-	ofstream outfile(s.c_str());
+	std::cout<<c.str();
+	std::ofstream outfile(s.c_str());
 	for(unsigned int h=0;h<rig*cols;++h)
 	{
 		outfile<<v[h];
@@ -306,7 +306,7 @@ void traffico::stampafile(unsigned int n)
 		}
 		else if (h!=rig*cols-1)
 		{
-			outfile<<endl;
+			outfile<<std::endl;
 		}
 	}
 	outfile.close();
@@ -317,7 +317,7 @@ void traffico::fai(){
 	for(unsigned int c=0;c<vec.size();++c)
 	{
 		scambi(c,vec[c]-pre);
-		stampafile(c);cout<<endl;
+		stampafile(c);std::cout<<std::endl;
 		pre=vec[c];
 	}
 }
@@ -326,11 +326,11 @@ void traffico::fai(){
 //la gestione di eventuali errori di lunghezza errata delle righe
 dimension::dimension(const char *filename_X)
 {  
-	ifstream file_X;
+	std::ifstream file_X;
 	file_X.open(filename_X);
 	if(file_X.is_open())
 	{
-		string line;
+		std::string line;
 		rig=0;
 		cols=0;
 		getline(file_X,line);
@@ -341,7 +341,7 @@ dimension::dimension(const char *filename_X)
 		{                       //controllo lunghezza righe
 			if(lunghezza!=line.size())
 			{
-				cout<<"righe di diversa lunghezza o vuote";
+				std::cout<<"righe di diversa lunghezza o vuote";
 				exit(1);
 			}
 			++rig;

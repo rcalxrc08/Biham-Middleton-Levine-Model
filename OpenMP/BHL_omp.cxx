@@ -128,7 +128,7 @@ void traffico::stampa()
 		{
 			cout<<v[j+i*cols];cout<<' ';
 		}
-		cout<<endl;
+		cout<<std::endl;
 	}
 }
 
@@ -264,7 +264,7 @@ void traffico::scambi(unsigned int o,unsigned int n)
 			++cont;
 			if(B==false && R==false)
 			{
-				cout<<"Matrix stopped at step "<<cont<<endl;
+				cout<<"Matrix stopped at step "<<cont<<std::endl;
 				break;
 			}
 		}
@@ -282,7 +282,7 @@ void traffico::scambi(unsigned int o,unsigned int n)
 			++cont;
 			if(B==false && R==false)
 			{
-				cout<<"Matrix stopped at step "<<cont<<endl;
+				cout<<"Matrix stopped at step "<<cont<<std::endl;
 				break;
 			}
 		}
@@ -310,7 +310,7 @@ void traffico::stampafile(unsigned int n)
 		}
 		else if (h!=rig*cols-1)
 		{
-			outfile<<endl;
+			outfile<<std::endl;
 		}
 	}
 	outfile.close();
@@ -322,7 +322,8 @@ void traffico::fai()
 	for(unsigned int c=0;c<vec.size();++c)
 	{
 		scambi(c,vec[c]-pre);
-		stampafile(c);cout<<endl;
+		stampafile(c);
+		cout<<std::endl;
 		pre=vec[c];
 	}
 }
