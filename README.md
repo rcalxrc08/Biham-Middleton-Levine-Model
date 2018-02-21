@@ -1,4 +1,4 @@
-# Biham-Middleton-Levine-Model ![Build Status](https://travis-ci.org/rcalxrc08/Biham-Middleton-Levine-Model.svg?branch=master)
+# Biham-Middleton-Levine-Model [![Build Status](https://travis-ci.org/rcalxrc08/Biham-Middleton-Levine-Model.svg?branch=master)](https://travis-ci.org/rcalxrc08/Biham-Middleton-Levine-Model)
 Biham–Middleton–Levine Traffic Model
 It is an old code of my Master of Science Course.
 
